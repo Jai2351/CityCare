@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Details - Movie Time</title>
+  <meta name="description" content="View detailed information, cast, overview, user ratings, reviews, and trailers on Movie Time.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">🎬</span> Movie Time
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="movies.html" class="nav-link">Movies</a>
+        <a href="genres.html" class="nav-link">Genres</a>
+        <a href="trending.html" class="nav-link">Trending</a>
+        <a href="top-rated.html" class="nav-link">Top Rated</a>
+        <a href="upcoming.html" class="nav-link">Upcoming</a>
+      </nav>
+
+      <div class="nav-right">
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" placeholder="Search movies, cast, genres...">
+          <button class="clear-search">✕</button>
+          <div class="search-suggestions"></div>
+        </div>
+
+        <a href="watchlist.html" class="nav-icon-btn">
+          <span>📌</span>
+          <span class="badge-count watchlist-count-badge">0</span>
+        </a>
+
+        <a href="profile.html" class="nav-icon-btn">
+          <span>👤</span>
+        </a>
+
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="movies.html" class="nav-link">Movies</a>
+    <a href="genres.html" class="nav-link">Genres</a>
+    <a href="trending.html" class="nav-link">Trending</a>
+    <a href="top-rated.html" class="nav-link">Top Rated</a>
+    <a href="upcoming.html" class="nav-link">Upcoming</a>
+    <a href="watchlist.html" class="nav-link">Watchlist</a>
+    <a href="profile.html" class="nav-link">Profile</a>
+  </div>
+
+  <div class="movie-details-wrapper">
+    
+    <!-- Hero Details Banner -->
+    <section class="details-hero movie-details-hero"></section>
+
+    <!-- Main Content Grid -->
+    <main class="container section">
+      
+      <!-- Cast Section -->
+      <section style="margin-bottom: 3rem;">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <span class="section-subtitle">Performers</span>
+            <h2 class="section-title">🎭 Top Cast</h2>
+          </div>
+        </div>
+        <div class="cast-grid" id="castList"></div>
+      </section>
+
+      <!-- Rating & Reviews Section -->
+      <section style="margin-bottom: 3.5rem;">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <span class="section-subtitle">Community & Your Voice</span>
+            <h2 class="section-title">💬 User Ratings & Reviews</h2>
+          </div>
+        </div>
+
+        <!-- Personal Star Rating Box -->
+        <div class="user-rating-box" id="userRatingBox"></div>
+
+        <!-- Write Review Form -->
+        <div class="review-form" id="reviewFormBox"></div>
+
+        <!-- Reviews List -->
+        <div class="reviews-list" id="reviewsListBox"></div>
+      </section>
+
+      <!-- Similar Movies Section -->
+      <section>
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <span class="section-subtitle">Recommendations</span>
+            <h2 class="section-title">🍿 You Might Also Like</h2>
+          </div>
+        </div>
+
+        <div class="movie-grid" id="similarMoviesGrid"></div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Trailer Modal Overlay -->
+  <div class="modal-overlay" id="trailerModal">
+    <div class="modal-container">
+      <span class="modal-close-btn">✕</span>
+      <div class="video-responsive"></div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-icon">🎬</span> Movie Time
+          </a>
+          <p>Discover movies, explore new stories, and find your next favorite film.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Navigation</h4>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="movies.html">Movies</a>
+            <a href="genres.html">Genres</a>
+            <a href="trending.html">Trending</a>
+            <a href="top-rated.html">Top Rated</a>
+            <a href="upcoming.html">Upcoming</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">My Account</h4>
+          <div class="footer-links">
+            <a href="watchlist.html">My Watchlist</a>
+            <a href="profile.html">Profile Dashboard</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Information</h4>
+          <div class="footer-links">
+            <a href="about.html">About Movie Time</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Movie Time. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/movie-api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/movie-details.js"></script>
+</body>
+</html>

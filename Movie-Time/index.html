@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Time - Discover Your Next Movie</title>
+  <meta name="description" content="Discover, explore, and track your favorite movies on Movie Time. Cinematic dark mode, ratings, reviews, trailers, and personal watchlist.">
+  <link rel="stylesheet" href="css/style.css?v=10">
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">🎬</span> Movie Time
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="movies.html" class="nav-link">Movies</a>
+        <a href="genres.html" class="nav-link">Genres</a>
+        <a href="trending.html" class="nav-link">Trending</a>
+        <a href="top-rated.html" class="nav-link">Top Rated</a>
+        <a href="upcoming.html" class="nav-link">Upcoming</a>
+      </nav>
+
+      <div class="nav-right">
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" placeholder="Search movies, cast, genres...">
+          <button class="clear-search">✕</button>
+          <div class="search-suggestions"></div>
+        </div>
+
+        <a href="watchlist.html" class="nav-icon-btn">
+          <span>📌</span>
+          <span class="badge-count watchlist-count-badge">0</span>
+        </a>
+
+        <a href="profile.html" class="nav-icon-btn">
+          <span>👤</span>
+        </a>
+
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-nav">
+    <a href="index.html" class="nav-link active">Home</a>
+    <a href="movies.html" class="nav-link">Movies</a>
+    <a href="genres.html" class="nav-link">Genres</a>
+    <a href="trending.html" class="nav-link">Trending</a>
+    <a href="top-rated.html" class="nav-link">Top Rated</a>
+    <a href="upcoming.html" class="nav-link">Upcoming</a>
+    <a href="watchlist.html" class="nav-link">Watchlist</a>
+    <a href="profile.html" class="nav-link">Profile</a>
+  </div>
+
+  <!-- Hero Section with Plex-Style Tilted Poster Collage Background -->
+  <section class="hero" id="homeHero">
+    <div class="hero-poster-wall-wrapper">
+      <div class="hero-poster-wall" id="heroPosterWall"></div>
+    </div>
+    <script>
+      (function() {
+        function buildWall() {
+          const wall = document.getElementById('heroPosterWall');
+          if (!wall) return;
+          let posters = [];
+          if (typeof MOVIES_DATA !== 'undefined' && Array.isArray(MOVIES_DATA) && MOVIES_DATA.length >= 10) {
+            posters = MOVIES_DATA.map(m => m.poster).filter(Boolean);
+          }
+          if (posters.length < 15) {
+            posters = [
+              'https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGvjW21a2Yw.jpg',
+              'https://image.tmdb.org/t/p/w500/1pdfLPoVxWGlBGeRCLmwDjgW2Ww.jpg',
+              'https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg',
+              'https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg',
+              'https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
+              'https://image.tmdb.org/t/p/w500/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg',
+              'https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg',
+              'https://image.tmdb.org/t/p/w500/oYuLEydvwz1zzUhAcBssYxW2Wh4.jpg',
+              'https://image.tmdb.org/t/p/w500/nEufeZ95L4vXMjMvGlmFqW2vMC1.jpg',
+              'https://image.tmdb.org/t/p/w500/vpnVM9B6NMmQpPBZohHQ9vHGvM7.jpg',
+              'https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg',
+              'https://image.tmdb.org/t/p/w500/f89U3Y9EJuNgm1M9vTJm2AbAi55.jpg',
+              'https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r922eJuHY.jpg',
+              'https://image.tmdb.org/t/p/w500/b33nnKl1vWkJkWNmAYVBH0xYl25.jpg',
+              'https://image.tmdb.org/t/p/w500/or06tUk8PXAb9pB57CGtWp1bBPr.jpg'
+            ];
+          }
+          let html = '';
+          for (let c = 0; c < 5; c++) {
+            html += '<div class="poster-col">';
+            for (let r = 0; r < 5; r++) {
+              const imgUrl = posters[(c * 5 + r) % posters.length];
+              html += `<div class="wall-card"><img src="${imgUrl}" alt="Poster" loading="eager" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500&auto=format&fit=crop';"></div>`;
+            }
+            html += '</div>';
+          }
+          wall.innerHTML = html;
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', buildWall);
+        } else {
+          buildWall();
+        }
+      })();
+    </script>
+    <div class="hero-overlay"></div>
+    <div class="hero-bottom-shadow"></div>
+    <div class="container">
+      <div class="hero-content" id="heroContent">
+        <div class="hero-badge">🎬 Movie Time Platform</div>
+        <h1 class="hero-title" id="heroTitle">Free Movies & Stories, Watch Anytime Anywhere.</h1>
+        <p class="hero-overview" id="heroOverview">
+          The search is over! Let Movie Time help you discover the perfect film to watch tonight. Explore thousands of blockbusters, trending releases, top rated masterpieces, and instant trailers.
+        </p>
+        <div class="hero-actions" id="heroActions">
+          <a href="movies.html" class="btn btn-primary" style="padding: 0.95rem 2.2rem; font-size: 1.05rem;">
+            🍿 Explore Movies
+          </a>
+          <button class="btn btn-gold" id="heroFeaturedBtn" onclick="window.location.href='movie-details.html?id=m1'">
+            ▶ Watch Free
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Sections -->
+  <main class="container">
+    
+    <!-- Trending Movies Section -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-subtitle">Hot Right Now</span>
+          <h2 class="section-title">🔥 Trending Movies</h2>
+        </div>
+        <a href="trending.html" class="view-all-link">View All Trending →</a>
+      </div>
+
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" id="trendPrev">❮</button>
+        <div class="carousel-track" id="trendingTrack"></div>
+        <button class="carousel-btn next" id="trendNext">❯</button>
+      </div>
+    </section>
+
+    <!-- Popular Movies Grid -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-subtitle">Fan Favorites</span>
+          <h2 class="section-title">🌟 Popular Movies</h2>
+        </div>
+        <a href="movies.html" class="view-all-link">Explore All Movies →</a>
+      </div>
+
+      <div class="movie-grid" id="popularGrid"></div>
+    </section>
+
+    <!-- Top Rated Section -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-subtitle">Critically Acclaimed</span>
+          <h2 class="section-title">🏆 Top Rated</h2>
+        </div>
+        <a href="top-rated.html" class="view-all-link">View Top Rated →</a>
+      </div>
+
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" id="topPrev">❮</button>
+        <div class="carousel-track" id="topRatedTrack"></div>
+        <button class="carousel-btn next" id="topNext">❯</button>
+      </div>
+    </section>
+
+    <!-- Latest & Upcoming Releases -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-subtitle">Coming Soon</span>
+          <h2 class="section-title">🚀 Upcoming Movies</h2>
+        </div>
+        <a href="upcoming.html" class="view-all-link">View Upcoming →</a>
+      </div>
+
+      <div class="movie-grid" id="upcomingGrid"></div>
+    </section>
+
+    <!-- Browse by Genre -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-subtitle">Categories</span>
+          <h2 class="section-title">🎭 Browse by Genre</h2>
+        </div>
+        <a href="genres.html" class="view-all-link">All Genres →</a>
+      </div>
+
+      <div class="genre-grid" id="homeGenreGrid"></div>
+    </section>
+
+  </main>
+
+  <!-- Trailer Modal Overlay -->
+  <div class="modal-overlay" id="trailerModal">
+    <div class="modal-container">
+      <span class="modal-close-btn">✕</span>
+      <div class="video-responsive"></div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-icon">🎬</span> Movie Time
+          </a>
+          <p>Discover movies, explore new stories, and find your next favorite film. Crafted for movie enthusiasts worldwide.</p>
+          <div class="social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="social-icon">📷</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="social-icon">🎥</a>
+            <a href="https://x.com" target="_blank" rel="noopener" class="social-icon">🐦</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Navigation</h4>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="movies.html">Movies</a>
+            <a href="genres.html">Genres</a>
+            <a href="trending.html">Trending</a>
+            <a href="top-rated.html">Top Rated</a>
+            <a href="upcoming.html">Upcoming</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">My Account</h4>
+          <div class="footer-links">
+            <a href="watchlist.html">My Watchlist</a>
+            <a href="profile.html">Profile Dashboard</a>
+            <a href="profile.html">My Favorites</a>
+            <a href="profile.html">My Reviews</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Information</h4>
+          <div class="footer-links">
+            <a href="about.html">About Movie Time</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="404.html">404 Page Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Movie Time. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js?v=10"></script>
+  <script src="js/storage.js?v=10"></script>
+  <script src="js/movie-api.js?v=10"></script>
+  <script src="js/app.js?v=10"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Render Trending Carousel Track
+      const trending = await window.MovieAPI.getTrending('both');
+      const trendingTrack = document.querySelector('#trendingTrack');
+      if (trendingTrack) {
+        trendingTrack.innerHTML = trending.slice(0, 10).map(m => window.renderMovieCard(m)).join('');
+      }
+
+      // Carousel Scroll Handlers
+      const bindScroll = (prevId, nextId, trackId) => {
+        const prev = document.querySelector(prevId);
+        const next = document.querySelector(nextId);
+        const track = document.querySelector(trackId);
+        if (prev && next && track) {
+          prev.onclick = () => track.scrollBy({ left: -450, behavior: 'smooth' });
+          next.onclick = () => track.scrollBy({ left: 450, behavior: 'smooth' });
+        }
+      };
+      bindScroll('#trendPrev', '#trendNext', '#trendingTrack');
+      bindScroll('#topPrev', '#topNext', '#topRatedTrack');
+
+      // Render Popular Grid (Top 12)
+      const popular = await window.MovieAPI.getMovies({ sort: 'Popularity' });
+      const popularGrid = document.querySelector('#popularGrid');
+      if (popularGrid) {
+        popularGrid.innerHTML = popular.slice(0, 12).map(m => window.renderMovieCard(m)).join('');
+      }
+
+      // Render Top Rated Track
+      const topRated = await window.MovieAPI.getTopRated();
+      const topTrack = document.querySelector('#topRatedTrack');
+      if (topTrack) {
+        topTrack.innerHTML = topRated.slice(0, 10).map(m => window.renderMovieCard(m)).join('');
+      }
+
+      // Render Upcoming Grid
+      const upcoming = await window.MovieAPI.getUpcoming();
+      const upcomingGrid = document.querySelector('#upcomingGrid');
+      if (upcomingGrid) {
+        upcomingGrid.innerHTML = upcoming.slice(0, 6).map(m => window.renderMovieCard(m)).join('');
+      }
+
+      // Render Home Genre Grid (6 genres)
+      const homeGenreGrid = document.querySelector('#homeGenreGrid');
+      if (homeGenreGrid) {
+        const genresList = [
+          { name: 'Action', bg: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=600&q=80' },
+          { name: 'Sci-Fi', bg: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600&q=80' },
+          { name: 'Drama', bg: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80' },
+          { name: 'Crime', bg: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&q=80' },
+          { name: 'Animation', bg: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&q=80' },
+          { name: 'Comedy', bg: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=600&q=80' }
+        ];
+
+        const allMovies = await window.MovieAPI.getMovies();
+        homeGenreGrid.innerHTML = genresList.map(g => {
+          const count = allMovies.filter(m => m.genres.includes(g.name)).length;
+          return `
+            <div class="genre-card" onclick="window.location.href='movies.html?genre=${g.name}'">
+              <img src="${g.bg}" alt="${g.name}" class="genre-bg" loading="lazy">
+              <div class="genre-overlay"></div>
+              <div class="genre-info">
+                <h3 class="genre-name">${g.name}</h3>
+                <div class="genre-count">${count} Movies</div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile - Movie Time</title>
+  <meta name="description" content="View your Movie Time dashboard, saved watchlist, favorites, submitted reviews, and recently viewed movies.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">🎬</span> Movie Time
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="movies.html" class="nav-link">Movies</a>
+        <a href="genres.html" class="nav-link">Genres</a>
+        <a href="trending.html" class="nav-link">Trending</a>
+        <a href="top-rated.html" class="nav-link">Top Rated</a>
+        <a href="upcoming.html" class="nav-link">Upcoming</a>
+      </nav>
+
+      <div class="nav-right">
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" placeholder="Search movies, cast, genres...">
+          <button class="clear-search">✕</button>
+          <div class="search-suggestions"></div>
+        </div>
+
+        <a href="watchlist.html" class="nav-icon-btn">
+          <span>📌</span>
+          <span class="badge-count watchlist-count-badge">0</span>
+        </a>
+
+        <a href="profile.html" class="nav-icon-btn">
+          <span>👤</span>
+        </a>
+
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="movies.html" class="nav-link">Movies</a>
+    <a href="genres.html" class="nav-link">Genres</a>
+    <a href="trending.html" class="nav-link">Trending</a>
+    <a href="top-rated.html" class="nav-link">Top Rated</a>
+    <a href="upcoming.html" class="nav-link">Upcoming</a>
+    <a href="watchlist.html" class="nav-link">Watchlist</a>
+    <a href="profile.html" class="nav-link active">Profile</a>
+  </div>
+
+  <!-- Page Header -->
+  <section class="page-header" style="padding-bottom: 1.5rem;">
+    <div class="container">
+      <h1 class="page-title">Profile Dashboard</h1>
+      <p class="page-subtitle">Manage your personal cinema collection and viewing history.</p>
+    </div>
+  </section>
+
+  <!-- Main Profile Content -->
+  <main class="container section profile-page">
+    
+    <!-- User Profile Banner Card -->
+    <div class="profile-header">
+      <div class="profile-avatar">👤</div>
+      <div class="profile-details">
+        <h2>Movie Time Fan</h2>
+        <p class="profile-email">user@movietime.app • Premium Explorer</p>
+        
+        <div class="profile-stats">
+          <div class="stat-box">
+            <span class="stat-value" id="statWatchlistCount">0</span>
+            <span class="stat-label">Watchlist</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value" id="statFavCount">0</span>
+            <span class="stat-label">Favorites</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value" id="statReviewsCount">0</span>
+            <span class="stat-label">Reviews</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value" id="statRecentCount">0</span>
+            <span class="stat-label">Recent</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabbed Dashboard Navigation -->
+    <div class="profile-tabs">
+      <button class="tab-btn active" data-tab="watchlist">📌 My Watchlist</button>
+      <button class="tab-btn" data-tab="favorites">❤️ My Favorites</button>
+      <button class="tab-btn" data-tab="reviews">✍️ My Reviews</button>
+      <button class="tab-btn" data-tab="recent">👁️ Recently Viewed</button>
+    </div>
+
+    <!-- Active Tab Display Content -->
+    <div id="profileTabContent" style="min-height: 250px; margin-bottom: 3rem;"></div>
+
+  </main>
+
+  <!-- Trailer Modal Overlay -->
+  <div class="modal-overlay" id="trailerModal">
+    <div class="modal-container">
+      <span class="modal-close-btn">✕</span>
+      <div class="video-responsive"></div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-icon">🎬</span> Movie Time
+          </a>
+          <p>Discover movies, explore new stories, and find your next favorite film.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Navigation</h4>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="movies.html">Movies</a>
+            <a href="genres.html">Genres</a>
+            <a href="trending.html">Trending</a>
+            <a href="top-rated.html">Top Rated</a>
+            <a href="upcoming.html">Upcoming</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">My Account</h4>
+          <div class="footer-links">
+            <a href="watchlist.html">My Watchlist</a>
+            <a href="profile.html">Profile Dashboard</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Information</h4>
+          <div class="footer-links">
+            <a href="about.html">About Movie Time</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Movie Time. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/movie-api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>
